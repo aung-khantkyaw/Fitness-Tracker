@@ -18,7 +18,7 @@ namespace Fitness_Tracker
             _loginForm = new Main();
             _userController = new UserController(_loginForm);
             _goalController = new GoalController(this);
-            _goalController.DisplayGoals(dataGridViewGoal);
+            _goalController.DisplayGoalsByUsername(dataGridViewGoal, SessionManager.Username);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

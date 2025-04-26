@@ -113,12 +113,7 @@ namespace Fitness_Tracker.Controller
             {
                 if (PasswordHasher.VerifyPassword(password, user.password))
                 {
-                    SessionManager.UserId = user.Id;
-                    SessionManager.Username = user.username;
-                    SessionManager.UserEmail = user.email;
-                    SessionManager.UserWeight = (int)(user.weight as int?);
-                    SessionManager.UserHeight = (int)(user.height as int?);
-                    SessionManager.UserRole = user.role;
+                    UpdateSession(user);
 
                     _loginForm.ShowSuccessMessage("Login successful!");
 
@@ -161,17 +156,24 @@ namespace Fitness_Tracker.Controller
 
         public void AccountUpdate(User user)
         {
-            if(user != null)
+            if (user != null)
             {
-                if (_userModel.UpdateUser(user))
+                if (user.username.Equals(SessionManager.Username))
                 {
-                    SessionManager.UserId = user.Id;
-                    SessionManager.Username = user.username;
-                    SessionManager.UserEmail = user.email;
-                    SessionManager.UserWeight = (int)(user.weight as int?);
-                    SessionManager.UserHeight = (int)(user.height as int?);
-                    SessionManager.UserRole = user.role;
+                    if (_userModel.UpdateUser(user))
+                    {
+                        _profileForm.ShowSuccessMessage("Account Update successful!");
+                        UpdateSession(user);
+                    }
+                    else
+                    {
+                        _profileForm.ShowErrorMessage("Account Update failed. Please try again.");
+                    }
+                }
+                else if (_goalModel.UpdateUsernameOfGoal(SessionManager.Username, user.username) && _userModel.UpdateUser(user))
+                {
                     _profileForm.ShowSuccessMessage("Account Update successful!");
+                    UpdateSession(user);
                 }
                 else
                 {
@@ -180,21 +182,26 @@ namespace Fitness_Tracker.Controller
             }
         }
 
-        public void AccountDelete(string username)
+        private void UpdateSession(User user)
+        {
+            SessionManager.UserId = user.Id;
+            SessionManager.Username = user.username;
+            SessionManager.UserEmail = user.email;
+            SessionManager.UserWeight = (int)(int?)user.weight;
+            SessionManager.UserHeight = (int)(int?)user.height;
+            SessionManager.UserRole = user.role;
+        }
+
+        public bool AccountDelete(string username)
         {
             if (_goalModel.DeleteGoalByUsername(username))
             {
                 if (_userModel.DeleteUser(username))
                 {
-                    Profile profile = new Profile(_loginForm);
-                    profile.Hide();
-                    _loginForm.Show();
+                    return true;
                 }
             }
-            else
-            {
-                _profileForm.ShowErrorMessage("Account Delete is not succesful.");
-            }
+            return false; 
         }
     }
 }

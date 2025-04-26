@@ -76,6 +76,33 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
+        public bool UpdateUsernameOfGoal(string oldUsername, string newUsername)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "UPDATE Goals SET username = @NewUsername WHERE username = @OldUsername";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@NewUsername", newUsername);
+                command.Parameters.AddWithValue("@OldUsername", oldUsername);
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error during Goal Username Update: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred during Goal Username Update: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
         public bool DeleteGoal(int Id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -150,6 +177,34 @@ namespace Fitness_Tracker.DataAccess
                 catch (Exception ex)
                 {
                     MessageBox.Show("An unexpected error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+        }
+
+        public DataTable GetGoalsByUsername(string username)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Goals WHERE username = @Username";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Username", username);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
+                try
+                {
+                    connection.Open();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error retrieving goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred while retrieving goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
             }

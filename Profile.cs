@@ -74,7 +74,15 @@ namespace Fitness_Tracker
         {
             if (MessageBox.Show("Are you sure you want to Delete Account?", "Confirm Account Delete", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
             {
-                _userController.AccountDelete(SessionManager.Username);
+                if (_userController.AccountDelete(SessionManager.Username))
+                {
+                    this.Hide();
+                    _loginForm.Show();
+                }
+                else
+                {
+                    ShowErrorMessage("Account Delete Fail.");
+                }
             }
         }
 

@@ -68,7 +68,27 @@ namespace Fitness_Tracker.Controller
                 DataTable goals = _goalModel.GetGoals(); 
                 if (goals != null)
                 {
-                    dataGridView.DataSource = goals; // Bind the DataTable to the DataGridView
+                    dataGridView.DataSource = goals;
+                }
+                else
+                {
+                    _goalForm.ShowErrorMessage("No goals found to display.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _goalForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
+            }
+        }
+
+        public void DisplayGoalsByUsername(DataGridView dataGridView, string username)
+        {
+            try
+            {
+                DataTable goals = _goalModel.GetGoalsByUsername(username);
+                if (goals != null)
+                {
+                    dataGridView.DataSource = goals; 
                 }
                 else
                 {

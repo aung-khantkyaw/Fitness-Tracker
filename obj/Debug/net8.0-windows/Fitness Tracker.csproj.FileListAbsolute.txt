@@ -1,0 +1,29 @@
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\Fitness Tracker.exe
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\Fitness Tracker.deps.json
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\Fitness Tracker.runtimeconfig.json
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\Fitness Tracker.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\Fitness Tracker.pdb
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.Main.resources
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.Properties.Resources.resources
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.Register.resources
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.csproj.GenerateResource.cache
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.AssemblyInfoInputs.cache
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.AssemblyInfo.cs
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.csproj.CoreCompileInputs.cache
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.dll
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\refint\Fitness Tracker.dll
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.pdb
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.genruntimeconfig.cache
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\ref\Fitness Tracker.dll
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.csproj.AssemblyReference.cache
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.Profile.resources
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\runtimes\unix\lib\net8.0\System.Data.SqlClient.dll
+D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Data.SqlClient.dll
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness .BAE6D965.Up2Date
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.GoalForm.resources

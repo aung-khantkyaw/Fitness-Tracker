@@ -129,6 +129,34 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
+        public bool UpdateGoalFail()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "UPDATE Goals SET IsAchieved = 'Fail' WHERE CaloriesBurned < Goal AND @Today >= EndDate";
+                SqlCommand command = new SqlCommand(query, connection);
+                SqlParameter todayParam = new SqlParameter("@Today", System.Data.SqlDbType.DateTime);
+                todayParam.Value = DateTime.Today;
+                command.Parameters.Add(todayParam);
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error during UpdateGoalFail: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred during UpdateGoalFail: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
         public bool UpdateUsernameOfGoal(string oldUsername, string newUsername)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
@@ -263,18 +291,18 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
-        public int GetActiveGoalId()
+        public int GetActiveGoalId(string username)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string sql = "SELECT Id FROM Goals WHERE @Today >= StartDate AND (@Today <= EndDate OR EndDate IS NULL) AND IsAchieved = 'Inprogress';";
+                string sql = "SELECT Id FROM Goals WHERE @Today >= StartDate AND (@Today <= EndDate OR EndDate IS NULL) AND IsAchieved = 'Inprogress' AND Username = @Username;";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     SqlParameter todayParam = new SqlParameter("@Today", System.Data.SqlDbType.DateTime);
                     todayParam.Value = DateTime.Today;
                     command.Parameters.Add(todayParam);
-
+                    command.Parameters.AddWithValue("@Username", username);
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.Read())

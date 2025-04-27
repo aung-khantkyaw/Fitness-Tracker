@@ -32,8 +32,6 @@
             label1 = new Label();
             btnGoal = new Button();
             tbId = new TextBox();
-            btnDelete = new Button();
-            btnUpdate = new Button();
             btnCreate = new Button();
             dataGridViewActivity = new DataGridView();
             label5 = new Label();
@@ -95,30 +93,10 @@
             tbId.TabIndex = 12;
             tbId.Visible = false;
             // 
-            // btnDelete
-            // 
-            btnDelete.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnDelete.Location = new Point(587, 232);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 30);
-            btnDelete.TabIndex = 11;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnUpdate
-            // 
-            btnUpdate.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnUpdate.Location = new Point(452, 232);
-            btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(100, 30);
-            btnUpdate.TabIndex = 10;
-            btnUpdate.Text = "Update";
-            btnUpdate.UseVisualStyleBackColor = true;
-            // 
             // btnCreate
             // 
             btnCreate.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            btnCreate.Location = new Point(320, 232);
+            btnCreate.Location = new Point(285, 232);
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(100, 30);
             btnCreate.TabIndex = 9;
@@ -182,8 +160,6 @@
             panel2.Controls.Add(label2);
             panel2.Controls.Add(cbType);
             panel2.Controls.Add(tbId);
-            panel2.Controls.Add(btnDelete);
-            panel2.Controls.Add(btnUpdate);
             panel2.Controls.Add(btnCreate);
             panel2.Controls.Add(dataGridViewActivity);
             panel2.Controls.Add(label5);
@@ -307,8 +283,6 @@
         private Label label1;
         private Button btnGoal;
         private TextBox tbId;
-        private Button btnDelete;
-        private Button btnUpdate;
         private Button btnCreate;
         private DataGridView dataGridViewActivity;
         private Label label5;

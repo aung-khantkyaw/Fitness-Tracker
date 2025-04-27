@@ -16,7 +16,6 @@ namespace Fitness_Tracker
             InitializeComponent();
             _loginForm = loginForm;
             _userController = new UserController(this, _loginForm);
-            label12.Text = "Goal Id is : " + SessionManager.Goal;
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)

@@ -114,7 +114,8 @@ namespace Fitness_Tracker.Controller
             {
                 if (PasswordHasher.VerifyPassword(password, user.password))
                 {
-                    SessionManager.Goal = _goalModel.GetActiveGoalId();
+                    _goalModel.UpdateGoalFail();
+                    SessionManager.Goal = _goalModel.GetActiveGoalId(username);
                     UpdateSession(user);
 
                     _loginForm.ClearLoginFields();

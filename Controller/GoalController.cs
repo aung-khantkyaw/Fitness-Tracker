@@ -30,6 +30,7 @@ namespace Fitness_Tracker.Controller
             {
                 if (_goalModel.AddGoal(goal))
                 {
+                    SessionManager.Goal = _goalModel.GetActiveGoalId(SessionManager.Username);
                     _goalForm.ShowSuccessMessage("Goal Create Successful.");
                 }
             }

@@ -58,7 +58,6 @@
             btnDelete = new Button();
             btnEdit = new Button();
             panel3 = new Panel();
-            label12 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -136,7 +135,6 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Controls.Add(label12);
             panel2.Controls.Add(rBtnFemale);
             panel2.Controls.Add(rBtnMale);
             panel2.Controls.Add(label11);
@@ -392,15 +390,6 @@
             panel3.Size = new Size(227, 123);
             panel3.TabIndex = 7;
             // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Location = new Point(375, 107);
-            label12.Name = "label12";
-            label12.Size = new Size(44, 15);
-            label12.TabIndex = 18;
-            label12.Text = "label12";
-            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -456,6 +445,5 @@
         private Label label11;
         private Label label10;
         private TextBox tbAge;
-        private Label label12;
     }
 }

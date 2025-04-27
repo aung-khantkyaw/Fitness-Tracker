@@ -35,6 +35,11 @@
             btnLogout = new Button();
             label1 = new Label();
             panel2 = new Panel();
+            rBtnFemale = new RadioButton();
+            rBtnMale = new RadioButton();
+            label11 = new Label();
+            label10 = new Label();
+            tbAge = new TextBox();
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
@@ -53,6 +58,7 @@
             btnDelete = new Button();
             btnEdit = new Button();
             panel3 = new Panel();
+            label12 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -78,6 +84,7 @@
             btnActivity.TabIndex = 2;
             btnActivity.Text = "Activity";
             btnActivity.UseVisualStyleBackColor = true;
+            btnActivity.Click += btnActivity_Click;
             // 
             // btnGoal
             // 
@@ -129,6 +136,12 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(label12);
+            panel2.Controls.Add(rBtnFemale);
+            panel2.Controls.Add(rBtnMale);
+            panel2.Controls.Add(label11);
+            panel2.Controls.Add(label10);
+            panel2.Controls.Add(tbAge);
             panel2.Controls.Add(label9);
             panel2.Controls.Add(label8);
             panel2.Controls.Add(label7);
@@ -147,6 +160,61 @@
             panel2.Size = new Size(724, 537);
             panel2.TabIndex = 5;
             panel2.Click += Profile_Load;
+            panel2.Paint += panel2_Paint;
+            // 
+            // rBtnFemale
+            // 
+            rBtnFemale.AutoSize = true;
+            rBtnFemale.Enabled = false;
+            rBtnFemale.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            rBtnFemale.Location = new Point(161, 260);
+            rBtnFemale.Name = "rBtnFemale";
+            rBtnFemale.Size = new Size(70, 21);
+            rBtnFemale.TabIndex = 17;
+            rBtnFemale.TabStop = true;
+            rBtnFemale.Text = "Female";
+            rBtnFemale.UseVisualStyleBackColor = true;
+            // 
+            // rBtnMale
+            // 
+            rBtnMale.AutoSize = true;
+            rBtnMale.Enabled = false;
+            rBtnMale.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            rBtnMale.Location = new Point(44, 260);
+            rBtnMale.Name = "rBtnMale";
+            rBtnMale.Size = new Size(56, 21);
+            rBtnMale.TabIndex = 16;
+            rBtnMale.TabStop = true;
+            rBtnMale.Text = "Male";
+            rBtnMale.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label11.Location = new Point(45, 229);
+            label11.Name = "label11";
+            label11.Size = new Size(52, 17);
+            label11.TabIndex = 15;
+            label11.Text = "Gender";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label10.Location = new Point(45, 172);
+            label10.Name = "label10";
+            label10.Size = new Size(32, 17);
+            label10.TabIndex = 14;
+            label10.Text = "Age";
+            // 
+            // tbAge
+            // 
+            tbAge.Enabled = false;
+            tbAge.Location = new Point(45, 192);
+            tbAge.Name = "tbAge";
+            tbAge.Size = new Size(179, 23);
+            tbAge.TabIndex = 13;
             // 
             // label9
             // 
@@ -162,7 +230,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label8.Location = new Point(194, 253);
+            label8.Location = new Point(194, 373);
             label8.Name = "label8";
             label8.Size = new Size(30, 20);
             label8.TabIndex = 11;
@@ -172,7 +240,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold);
-            label7.Location = new Point(198, 194);
+            label7.Location = new Point(198, 314);
             label7.Name = "label7";
             label7.Size = new Size(26, 20);
             label7.TabIndex = 10;
@@ -182,7 +250,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label6.Location = new Point(45, 230);
+            label6.Location = new Point(45, 350);
             label6.Name = "label6";
             label6.Size = new Size(50, 17);
             label6.TabIndex = 9;
@@ -192,7 +260,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
-            label5.Location = new Point(45, 171);
+            label5.Location = new Point(45, 291);
             label5.Name = "label5";
             label5.Size = new Size(53, 17);
             label5.TabIndex = 8;
@@ -220,7 +288,7 @@
             // 
             // btnReset
             // 
-            btnReset.Location = new Point(141, 294);
+            btnReset.Location = new Point(141, 413);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(83, 23);
             btnReset.TabIndex = 5;
@@ -231,7 +299,7 @@
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(45, 294);
+            btnUpdate.Location = new Point(45, 413);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(83, 23);
             btnUpdate.TabIndex = 4;
@@ -243,7 +311,7 @@
             // tbHeight
             // 
             tbHeight.Enabled = false;
-            tbHeight.Location = new Point(45, 250);
+            tbHeight.Location = new Point(45, 370);
             tbHeight.Name = "tbHeight";
             tbHeight.Size = new Size(147, 23);
             tbHeight.TabIndex = 3;
@@ -251,7 +319,7 @@
             // tbWeight
             // 
             tbWeight.Enabled = false;
-            tbWeight.Location = new Point(45, 191);
+            tbWeight.Location = new Point(45, 311);
             tbWeight.Name = "tbWeight";
             tbWeight.Size = new Size(147, 23);
             tbWeight.TabIndex = 2;
@@ -324,6 +392,15 @@
             panel3.Size = new Size(227, 123);
             panel3.TabIndex = 7;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(375, 107);
+            label12.Name = "label12";
+            label12.Size = new Size(44, 15);
+            label12.TabIndex = 18;
+            label12.Text = "label12";
+            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -374,5 +451,11 @@
         private Label label8;
         private Label label7;
         private Label label9;
+        private RadioButton rBtnFemale;
+        private RadioButton rBtnMale;
+        private Label label11;
+        private Label label10;
+        private TextBox tbAge;
+        private Label label12;
     }
 }

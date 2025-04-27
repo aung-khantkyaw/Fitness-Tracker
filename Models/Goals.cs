@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fitness_Tracker.Models
 {
-    public class Goal
+    public class Goals
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,21 +16,23 @@ namespace Fitness_Tracker.Models
 
         [Required]
         [StringLength(50)]
-        public string username { get; set; }
+        public string Username { get; set; }
 
         [Required]
-        public int goal { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string start_date { get; set; }
+        public int Goal { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string end_date { get; set; }
+        public string StartDate { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string is_achieve { get; set; } = "Inprogress";
+        public string EndDate { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string IsAchieve { get; set; } = "Inprogress";
+
+        public int CaloriesBurned { get; set; }
     }
 }

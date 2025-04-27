@@ -18,6 +18,7 @@ namespace Fitness_Tracker.Controller
             _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
             _loginForm = loginForm;
             _userModel = new UserModel();
+            _goalModel = new GoalModel();
         }
         public UserController(Register registrationForm, Main loginForm)
         {
@@ -113,9 +114,8 @@ namespace Fitness_Tracker.Controller
             {
                 if (PasswordHasher.VerifyPassword(password, user.password))
                 {
+                    SessionManager.Goal = _goalModel.GetActiveGoalId();
                     UpdateSession(user);
-
-                    _loginForm.ShowSuccessMessage("Login successful!");
 
                     _loginForm.ClearLoginFields();
 
@@ -187,8 +187,10 @@ namespace Fitness_Tracker.Controller
             SessionManager.UserId = user.Id;
             SessionManager.Username = user.username;
             SessionManager.UserEmail = user.email;
-            SessionManager.UserWeight = (int)(int?)user.weight;
-            SessionManager.UserHeight = (int)(int?)user.height;
+            SessionManager.UserAge = (int)user.age;
+            SessionManager.UserGender = user.gender;
+            SessionManager.UserWeight = (int)user.weight;
+            SessionManager.UserHeight = (int)user.height;
             SessionManager.UserRole = user.role;
         }
 

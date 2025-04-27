@@ -9,12 +9,14 @@ namespace Fitness_Tracker
         private UserController _userController;
         private Main _loginForm;
         private GoalForm _goalForm;
+        private ActivityForm _activityForm;
 
         public Profile(Main loginForm)
         {
             InitializeComponent();
             _loginForm = loginForm;
             _userController = new UserController(this, _loginForm);
+            label12.Text = "Goal Id is : " + SessionManager.Goal;
         }
 
         private void toolStripTextBox1_Click(object sender, EventArgs e)
@@ -28,6 +30,15 @@ namespace Fitness_Tracker
             tbEmail.Text = SessionManager.UserEmail;
             tbWeight.Text = SessionManager.UserWeight.ToString();
             tbHeight.Text = SessionManager.UserHeight.ToString();
+            tbAge.Text = SessionManager.UserAge.ToString();
+            if (SessionManager.UserGender.Equals("Male", StringComparison.Ordinal))
+            {
+                rBtnMale.Checked = true;
+            }
+            else if (SessionManager.UserGender.Equals("Female", StringComparison.Ordinal))
+            {
+                rBtnFemale.Checked = true;
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -40,12 +51,48 @@ namespace Fitness_Tracker
             }
         }
 
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnGoal_Click(object sender, EventArgs e)
+        {
+            if (SessionManager.UserWeight > 0)
+            {
+                _goalForm = new GoalForm();
+                this.Hide();
+                _goalForm.Show();
+            }
+            else
+            {
+                ShowErrorMessage("If your Weight is not greater than 0, you can't go to goal.");
+            }
+        }
+
+        private void btnActivity_Click(object sender, EventArgs e)
+        {
+            if (SessionManager.UserWeight > 0)
+            {
+                _activityForm = new ActivityForm();
+                this.Hide();
+                _activityForm.Show();
+            }
+            else
+            {
+                ShowErrorMessage("If your Weight is not greater than 0, you can't go to goal.");
+            }
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             tbUsername.Enabled = true;
             tbEmail.Enabled = true;
             tbWeight.Enabled = true;
             tbHeight.Enabled = true;
+            tbAge.Enabled = true;
+            rBtnMale.Enabled = true;
+            rBtnFemale.Enabled = true;
 
             btnUpdate.Visible = true;
             btnReset.Visible = true;
@@ -58,6 +105,8 @@ namespace Fitness_Tracker
                 Id = SessionManager.UserId,
                 username = tbUsername.Text,
                 email = tbEmail.Text,
+                age = int.TryParse(tbAge.Text, out int parsedAge) ? parsedAge : 0,
+                gender = rBtnMale.Checked ? "Male" : (rBtnFemale.Checked ? "Female" : null),
                 weight = int.TryParse(tbWeight.Text, out int parsedWeight) ? parsedWeight : 0,
                 height = int.TryParse(tbHeight.Text, out int parsedHeight) ? parsedHeight : 0,
             };
@@ -99,22 +148,18 @@ namespace Fitness_Tracker
                 tbEmail.Enabled = false;
                 tbWeight.Enabled = false;
                 tbHeight.Enabled = false;
+                tbAge.Enabled = false;
+                rBtnMale.Enabled = false;
+                rBtnFemale.Enabled = false;
 
                 btnUpdate.Visible = false;
                 btnReset.Visible = false;
             }
         }
 
-        private void btnProfile_Click(object sender, EventArgs e)
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            return;
-        }
 
-        private void btnGoal_Click(object sender, EventArgs e)
-        {
-            _goalForm = new GoalForm();
-            this.Hide();
-            _goalForm.Show();
         }
     }
 }

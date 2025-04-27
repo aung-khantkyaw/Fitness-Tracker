@@ -130,6 +130,7 @@
             dataGridViewGoal.Size = new Size(716, 293);
             dataGridViewGoal.TabIndex = 8;
             dataGridViewGoal.CellClick += dataGridViewGoal_CellClick;
+            dataGridViewGoal.CellContentClick += dataGridViewGoal_CellContentClick;
             // 
             // label6
             // 
@@ -260,6 +261,7 @@
             btnActivity.TabIndex = 2;
             btnActivity.Text = "Activity";
             btnActivity.UseVisualStyleBackColor = true;
+            btnActivity.Click += btnActivity_Click;
             // 
             // btnGoal
             // 

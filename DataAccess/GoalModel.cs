@@ -17,16 +17,16 @@ namespace Fitness_Tracker.DataAccess
             _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\DELL\\Documents\\FitnessTracker.mdf;Integrated Security=True;Connect Timeout=30";
         }
 
-        public bool AddGoal(Goal goal)
+        public bool AddGoal(Goals Goal)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Goals (username, goal, start_date, end_date) VALUES (@Username, @Goal, @StartDate, @EndDate)";
+                string query = "INSERT INTO Goals (Username, Goal, StartDate, EndDate) VALUES (@Username, @Goal, @StartDate, @EndDate)";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Username", goal.username);
-                command.Parameters.AddWithValue("@Goal", goal.goal);
-                command.Parameters.AddWithValue("@StartDate", goal.start_date);
-                command.Parameters.AddWithValue("@EndDate", goal.end_date);
+                command.Parameters.AddWithValue("@Username", Goal.Username);
+                command.Parameters.AddWithValue("@Goal", Goal.Goal);
+                command.Parameters.AddWithValue("@StartDate", Goal.StartDate);
+                command.Parameters.AddWithValue("@EndDate", Goal.EndDate);
                 try
                 {
                     connection.Open();
@@ -46,17 +46,70 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
-        public bool UpdateGoal(Goal goal)
+        public bool UpdateGoal(Goals Goal)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Goals SET username = @Username, goal = @Goal, start_date = @StartDate, end_date = @EndDate WHERE Id = @Id";
+                string query = "UPDATE Goals SET Username = @Username, Goal = @Goal, StartDate = @StartDate, EndDate = @EndDate WHERE Id = @Id";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Username", goal.username);
-                command.Parameters.AddWithValue("@Goal", goal.goal);
-                command.Parameters.AddWithValue("@StartDate", goal.start_date);
-                command.Parameters.AddWithValue("@EndDate", goal.end_date);
-                command.Parameters.AddWithValue("@Id", goal.Id);
+                command.Parameters.AddWithValue("@Username", Goal.Username);
+                command.Parameters.AddWithValue("@Goal", Goal.Goal);
+                command.Parameters.AddWithValue("@StartDate", Goal.StartDate);
+                command.Parameters.AddWithValue("@EndDate", Goal.EndDate);
+                command.Parameters.AddWithValue("@Id", Goal.Id);
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error during Registration: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred during Registration: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        public bool UpdateGoalCaloriesBurned(int burnCal, int goalId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "UPDATE Goals SET CaloriesBurned = CaloriesBurned + @burnCal WHERE Id = @goalId";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@burnCal", burnCal);
+                command.Parameters.AddWithValue("@goalId", goalId);
+                try
+                {
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error during Registration: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred during Registration: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        public bool UpdateGoalIsAchieve(int goalId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "UPDATE Goals SET IsAchieved = 'Complete' WHERE Id = @goalId AND CaloriesBurned >= Goal;";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@goalId", goalId);
                 try
                 {
                     connection.Open();
@@ -80,7 +133,7 @@ namespace Fitness_Tracker.DataAccess
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Goals SET username = @NewUsername WHERE username = @OldUsername";
+                string query = "UPDATE Goals SET Username = @NewUsername WHERE Username = @OldUsername";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@NewUsername", newUsername);
                 command.Parameters.AddWithValue("@OldUsername", oldUsername);
@@ -129,13 +182,13 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
-        public bool DeleteGoalByUsername(string username)
+        public bool DeleteGoalByUsername(string Username)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 string query = "DELETE FROM Goals WHERE Username = @Username";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@Username", Username);
                 try
                 {
                     connection.Open();
@@ -171,7 +224,7 @@ namespace Fitness_Tracker.DataAccess
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Database Error retrieving goals: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Database Error retrieving Goals: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null; 
                 }
                 catch (Exception ex)
@@ -182,13 +235,13 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
-        public DataTable GetGoalsByUsername(string username)
+        public DataTable GetGoalsByUsername(string Username)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "SELECT * FROM Goals WHERE username = @Username";
+                string query = "SELECT * FROM Goals WHERE Username = @Username";
                 SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@Username", username);
+                command.Parameters.AddWithValue("@Username", Username);
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
                 DataTable dataTable = new DataTable();
                 try
@@ -199,15 +252,39 @@ namespace Fitness_Tracker.DataAccess
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Database Error retrieving goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Database Error retrieving Goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An unexpected error occurred while retrieving goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("An unexpected error occurred while retrieving Goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
             }
+        }
+
+        public int GetActiveGoalId()
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                string sql = "SELECT Id FROM Goals WHERE @Today >= StartDate AND (@Today <= EndDate OR EndDate IS NULL) AND IsAchieved = 'Inprogress';";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    SqlParameter todayParam = new SqlParameter("@Today", System.Data.SqlDbType.DateTime);
+                    todayParam.Value = DateTime.Today;
+                    command.Parameters.Add(todayParam);
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return (int)reader["Id"];
+                        }
+                    }
+                }
+            }
+            return 0;
         }
     }
 }

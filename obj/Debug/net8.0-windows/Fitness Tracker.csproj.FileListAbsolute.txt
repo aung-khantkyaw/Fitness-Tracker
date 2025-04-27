@@ -28,3 +28,4 @@ D:\Project\CS\Fitness Tracker\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\S
 D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness .BAE6D965.Up2Date
 D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.GoalForm.resources
 D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness Tracker.sourcelink.json
+D:\Project\CS\Fitness Tracker\obj\Debug\net8.0-windows\Fitness_Tracker.ActivityForm.resources

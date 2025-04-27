@@ -22,13 +22,16 @@ namespace Fitness_Tracker.Models
         [StringLength(255)] 
         public string password { get; set; }
 
+        public int? age { get; set; }
+
+        [StringLength(50)]
+        public string gender { get; set; }
         public int? weight { get; set; }
 
         public int? height { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime registration_date { get; set; }
 
         [Required]

@@ -1,7 +1,6 @@
 ﻿using Fitness_Tracker.Controller;
 using Fitness_Tracker.Models;
 using Fitness_Tracker.Utils;
-using System.Windows.Forms;
 
 namespace Fitness_Tracker
 {
@@ -11,6 +10,7 @@ namespace Fitness_Tracker
         private GoalController _goalController;
         private Main _loginForm;
         private Profile _profileForm;
+        private ActivityForm _activityForm;
 
         public GoalForm()
         {
@@ -43,6 +43,13 @@ namespace Fitness_Tracker
             return;
         }
 
+        private void btnActivity_Click(object sender, EventArgs e)
+        {
+            _activityForm = new ActivityForm();
+            this.Hide();
+            _activityForm.Show();
+        }
+
         public void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -52,7 +59,9 @@ namespace Fitness_Tracker
         {
             if (MessageBox.Show(message, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
             {
-                _goalController.DisplayGoals(dataGridViewGoal);
+                _goalController.DisplayGoalsByUsername(dataGridViewGoal, SessionManager.Username);
+                tbId.Text = string.Empty;
+                tbCalBurn.Text = string.Empty;
             }
 
         }
@@ -61,12 +70,12 @@ namespace Fitness_Tracker
         {
             if (IsNumber.IsNumberOrNot(tbCalBurn.Text))
             {
-                Goal goal = new Goal
+                Goals goal = new Goals
                 {
-                    username = SessionManager.Username,
-                    goal = int.TryParse(tbCalBurn.Text, out int parsedGoal) ? parsedGoal : 0,
-                    start_date = dtpStart.Value.ToString("M/dd/yyyy"),
-                    end_date = dtpEnd.Value.ToString("M/dd/yyyy"),
+                    Username = SessionManager.Username,
+                    Goal = int.TryParse(tbCalBurn.Text, out int parsedGoal) ? parsedGoal : 0,
+                    StartDate = dtpStart.Value.ToString("M/dd/yyyy"),
+                    EndDate = dtpEnd.Value.ToString("M/dd/yyyy"),
                 };
 
                 _goalController.AddGoal(goal);
@@ -82,13 +91,13 @@ namespace Fitness_Tracker
         {
             if (IsNumber.IsNumberOrNot(tbCalBurn.Text))
             {
-                Goal goal = new Goal
+                Goals goal = new Goals
                 {
                     Id = int.TryParse(tbId.Text, out int parsedId) ? parsedId : 0,
-                    username = SessionManager.Username,
-                    goal = int.TryParse(tbCalBurn.Text, out int parsedGoal) ? parsedGoal : 0,
-                    start_date = dtpStart.Value.ToString("M/dd/yyyy"),
-                    end_date = dtpEnd.Value.ToString("M/dd/yyyy"),
+                    Username = SessionManager.Username,
+                    Goal = int.TryParse(tbCalBurn.Text, out int parsedGoal) ? parsedGoal : 0,
+                    StartDate = dtpStart.Value.ToString("M/dd/yyyy"),
+                    EndDate = dtpEnd.Value.ToString("M/dd/yyyy"),
                 };
 
                 _goalController.UpdateGoal(goal);
@@ -116,6 +125,11 @@ namespace Fitness_Tracker
                 tbId.Text = selectedRow.Cells[0].Value.ToString();
                 tbCalBurn.Text = selectedRow.Cells[2].Value.ToString();
             }
-        } 
+        }
+
+        private void dataGridViewGoal_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }

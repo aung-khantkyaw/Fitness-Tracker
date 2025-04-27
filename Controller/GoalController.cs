@@ -19,7 +19,12 @@ namespace Fitness_Tracker.Controller
             _goalModel = new GoalModel();
         }
 
-        public void AddGoal(Goal goal)
+        public void GetActiveGoalId()
+        {
+
+        }
+
+        public void AddGoal(Goals goal)
         {
             if(goal != null)
             {
@@ -34,7 +39,7 @@ namespace Fitness_Tracker.Controller
             }
         }
 
-        public void UpdateGoal(Goal goal)
+        public void UpdateGoal(Goals goal)
         {
             if (goal != null)
             {

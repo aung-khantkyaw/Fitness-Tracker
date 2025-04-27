@@ -28,11 +28,13 @@ namespace Fitness_Tracker.DataAccess
                         User user = new User
                         {
                             Id = (int)reader["Id"],
-                            username = reader["Username"].ToString(), 
-                            password = reader["Password"].ToString(), 
+                            username = reader["Username"].ToString(),
                             email = reader["Email"].ToString(),
-                            weight = (int?)reader["weight"],
-                            height = (int?)reader["height"],
+                            password = reader["Password"].ToString(),
+                            age = (int)(int?)reader["Age"],
+                            gender = reader["Gender"].ToString(),
+                            weight = (int)(int?)reader["weight"],
+                            height = (int)(int?)reader["height"],
                             role = reader["role"].ToString()
                         };
                         reader.Close();
@@ -44,10 +46,16 @@ namespace Fitness_Tracker.DataAccess
                         return null;
                     }
                 }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine("Database error in GetUserByUsername: " + ex.Message);
+                    // Consider re-throwing a more specific database exception or a custom one
+                    throw;
+                }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error in GetUserByUsername: " + ex.Message);
-                    return null;
+                    Console.WriteLine("General error in GetUserByUsername: " + ex.Message);
+                    throw;
                 }
             }
         }
@@ -93,13 +101,11 @@ namespace Fitness_Tracker.DataAccess
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "INSERT INTO Users (username, email, password, weight, height) VALUES (@Username, @Email, @Password, @Weight, @Height)";
+                string query = "INSERT INTO Users (username, email, password) VALUES (@Username, @Email, @Password)";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", user.username);
                 command.Parameters.AddWithValue("@Email", user.email);
                 command.Parameters.AddWithValue("@Password", user.password);
-                command.Parameters.AddWithValue("@Weight", 0); 
-                command.Parameters.AddWithValue("@Height", 0);  
                 try
                 {
                     connection.Open();
@@ -123,10 +129,12 @@ namespace Fitness_Tracker.DataAccess
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                string query = "UPDATE Users SET username = @Username, email = @Email, weight = @Weight, height = @Height WHERE Id = @Id";
+                string query = "UPDATE Users SET username = @Username, email = @Email, age = @Age, gender = @Gender, weight = @Weight, height = @Height WHERE Id = @Id";
                 SqlCommand command = new SqlCommand(query, connection);
                 command.Parameters.AddWithValue("@Username", user.username);
                 command.Parameters.AddWithValue("@Email", user.email);
+                command.Parameters.AddWithValue("@Age", user.age);
+                command.Parameters.AddWithValue("@Gender", user.gender);
                 command.Parameters.AddWithValue("@Weight", user.weight);
                 command.Parameters.AddWithValue("@Height", user.height);
                 command.Parameters.AddWithValue("@Id", user.Id);

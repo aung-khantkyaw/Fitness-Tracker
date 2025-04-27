@@ -1,10 +1,6 @@
-﻿
-
-using Fitness_Tracker.Models;
-using Microsoft.VisualBasic.ApplicationServices;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Fitness_Tracker.Models;
 
 namespace Fitness_Tracker.DataAccess
 {

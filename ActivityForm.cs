@@ -1,7 +1,6 @@
 ﻿using Fitness_Tracker.Controller;
 using Fitness_Tracker.Models;
 using Fitness_Tracker.Utils;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Fitness_Tracker
 {
@@ -26,22 +25,21 @@ namespace Fitness_Tracker
 
         public void InsertDataToComboBox()
         {
-            List<ActivityType> activityTypes = _activityController.GetActivityTypeList(); // Get the list of ActivityTypes
+            List<ActivityType> activityTypes = _activityController.GetActivityTypeList(); 
 
-            if (activityTypes != null && activityTypes.Any()) // Check for null and empty list
+            if (activityTypes != null && activityTypes.Any()) 
             {
                 cbType.DataSource = activityTypes;
-                cbType.DisplayMember = "activity"; // Use the "activity" property of ActivityType
-                cbType.ValueMember = "Id";       // Optionally, set the ValueMember to the Id
+                cbType.DisplayMember = "activity"; 
+                cbType.ValueMember = "Id";       
             }
             else
             {
-                cbType.Items.Clear(); // Clear any existing items
-                cbType.Items.Add("No activities available"); // Add a message
-                cbType.Enabled = false;                   // Disable the ComboBox
+                cbType.Items.Clear(); 
+                cbType.Items.Add("No activities available"); 
+                cbType.Enabled = false;                   
             }
         }
-
 
         private void btnProfile_Click(object sender, EventArgs e)
         {
@@ -56,6 +54,7 @@ namespace Fitness_Tracker
             this.Hide();
             _goalForm.Show();
         }
+
         private void btnActivity_Click(object sender, EventArgs e)
         {
             return;
@@ -70,6 +69,7 @@ namespace Fitness_Tracker
                 _loginForm.Show();
             }
         }
+
         public void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -85,20 +85,6 @@ namespace Fitness_Tracker
         }
 
         private void dataGridViewActivity_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var selectedRow = dataGridViewActivity.SelectedRows[0];
-            if (selectedRow != null)
-            {
-                tbId.Text = selectedRow.Cells[0].Value.ToString();
-            }
-        }
-
-        private void ActivityForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridViewActivity_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var selectedRow = dataGridViewActivity.SelectedRows[0];
             if (selectedRow != null)
@@ -126,6 +112,16 @@ namespace Fitness_Tracker
             int metric_three_value = int.TryParse(tbThree.Text, out int parsedThree) ? parsedThree : 0;
 
             _activityController.AddActivity(activity.activity, metric_one_value, metric_two_value, metric_three_value);
+        }
+
+        private void ActivityForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridViewActivity_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

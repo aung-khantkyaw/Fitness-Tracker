@@ -1,7 +1,6 @@
 ﻿using Fitness_Tracker.Models;
 using Fitness_Tracker.Controller;
 
-
 namespace Fitness_Tracker
 {
     public partial class Register : Form
@@ -38,6 +37,7 @@ namespace Fitness_Tracker
         {
             ClearRegistrationFields();
         }
+
         private void linkToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             
@@ -66,7 +66,5 @@ namespace Fitness_Tracker
             tbPassword.Text = string.Empty;
             tbConfirmPassword.Text = string.Empty;
         }
-
-
     }
 }

@@ -21,16 +21,6 @@ namespace Fitness_Tracker
             _goalController.DisplayGoalsByUsername(dataGridViewGoal, SessionManager.Username);
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to log out?", "Confirm logout", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                _userController.Logout();
-                this.Hide();
-                _loginForm.Show();
-            }
-        }
-
         private void btnProfile_Click(object sender, EventArgs e)
         {
             _profileForm = new Profile(_loginForm);
@@ -48,6 +38,16 @@ namespace Fitness_Tracker
             _activityForm = new ActivityForm();
             this.Hide();
             _activityForm.Show();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log out?", "Confirm logout", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                _userController.Logout();
+                this.Hide();
+                _loginForm.Show();
+            }
         }
 
         public void ShowErrorMessage(string message)

@@ -18,11 +18,6 @@ namespace Fitness_Tracker
             _userController = new UserController(this, _loginForm);
         }
 
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Profile_Load(object sender, EventArgs e)
         {
             tbUsername.Text = SessionManager.Username;
@@ -39,20 +34,10 @@ namespace Fitness_Tracker
                 rBtnFemale.Checked = true;
             }
         }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to log out?", "Confirm logout", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                _userController.Logout();
-                this.Hide();
-                _loginForm.Show();
-            }
-        }
-
+                
         private void btnProfile_Click(object sender, EventArgs e)
         {
-
+            return;
         }
 
         private void btnGoal_Click(object sender, EventArgs e)
@@ -83,6 +68,16 @@ namespace Fitness_Tracker
             }
         }
 
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to log out?", "Confirm logout", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                _userController.Logout();
+                this.Hide();
+                _loginForm.Show();
+            }
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             tbUsername.Enabled = true;
@@ -95,6 +90,22 @@ namespace Fitness_Tracker
 
             btnUpdate.Visible = true;
             btnReset.Visible = true;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to Delete Account?", "Confirm Account Delete", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                if (_userController.AccountDelete(SessionManager.Username))
+                {
+                    this.Hide();
+                    _loginForm.Show();
+                }
+                else
+                {
+                    ShowErrorMessage("Account Delete Fail.");
+                }
+            }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -117,23 +128,7 @@ namespace Fitness_Tracker
         {
             Profile_Load(sender, e);
         }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to Delete Account?", "Confirm Account Delete", MessageBoxButtons.OK, MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                if (_userController.AccountDelete(SessionManager.Username))
-                {
-                    this.Hide();
-                    _loginForm.Show();
-                }
-                else
-                {
-                    ShowErrorMessage("Account Delete Fail.");
-                }
-            }
-        }
-
+        
         public void ShowErrorMessage(string message)
         {
             MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -157,6 +152,11 @@ namespace Fitness_Tracker
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
         {
 
         }

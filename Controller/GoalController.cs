@@ -1,8 +1,7 @@
-﻿using Fitness_Tracker.DataAccess;
-using Fitness_Tracker.Models;
+﻿using Fitness_Tracker.Models;
+using Fitness_Tracker.DataAccess;
 using Fitness_Tracker.Utils;
 using System.Data;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Fitness_Tracker.Controller
 {
@@ -19,9 +18,44 @@ namespace Fitness_Tracker.Controller
             _goalModel = new GoalModel();
         }
 
-        public void GetActiveGoalId()
+        public void DisplayGoals(DataGridView dataGridView)
         {
+            try
+            {
+                DataTable goals = _goalModel.GetGoals();
+                if (goals != null)
+                {
+                    dataGridView.DataSource = goals;
+                }
+                else
+                {
+                    _goalForm.ShowErrorMessage("No goals found to display.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _goalForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
+            }
+        }
 
+        public void DisplayGoalsByUsername(DataGridView dataGridView, string username)
+        {
+            try
+            {
+                DataTable goals = _goalModel.GetGoalsByUsername(username);
+                if (goals != null)
+                {
+                    dataGridView.DataSource = goals;
+                }
+                else
+                {
+                    _goalForm.ShowErrorMessage("No goals found to display.");
+                }
+            }
+            catch (Exception ex)
+            {
+                _goalForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
+            }
         }
 
         public void AddGoal(Goals goal)
@@ -65,46 +99,6 @@ namespace Fitness_Tracker.Controller
             {
                 _goalForm.ShowErrorMessage("Goal Delete Fail.");
             }
-        }
-
-        public void DisplayGoals(DataGridView dataGridView)
-        {
-            try
-            {
-                DataTable goals = _goalModel.GetGoals(); 
-                if (goals != null)
-                {
-                    dataGridView.DataSource = goals;
-                }
-                else
-                {
-                    _goalForm.ShowErrorMessage("No goals found to display.");
-                }
-            }
-            catch (Exception ex)
-            {
-                _goalForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
-            }
-        }
-
-        public void DisplayGoalsByUsername(DataGridView dataGridView, string username)
-        {
-            try
-            {
-                DataTable goals = _goalModel.GetGoalsByUsername(username);
-                if (goals != null)
-                {
-                    dataGridView.DataSource = goals; 
-                }
-                else
-                {
-                    _goalForm.ShowErrorMessage("No goals found to display.");
-                }
-            }
-            catch (Exception ex)
-            {
-                _goalForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
-            }
-        }
+        }       
     }
 }

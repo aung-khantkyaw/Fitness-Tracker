@@ -1,5 +1,5 @@
-﻿using Fitness_Tracker.Models;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Fitness_Tracker.Models;
 
 namespace Fitness_Tracker.DataAccess
 {

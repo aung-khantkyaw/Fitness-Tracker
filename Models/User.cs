@@ -36,6 +36,6 @@ namespace Fitness_Tracker.Models
 
         [Required]
         [StringLength(50)]
-        public string role { get; set; };
+        public string role { get; set; }
     }
 }

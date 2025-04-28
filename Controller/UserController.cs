@@ -173,10 +173,15 @@ namespace Fitness_Tracker.Controller
                         _profileForm.ShowErrorMessage("Account Update failed. Please try again.");
                     }
                 }
-                else if (_goalModel.UpdateUsernameOfGoal(SessionManager.Username, user.username) && _userModel.UpdateUser(user))
+                else if (!user.username.Equals(SessionManager.Username))
                 {
-                    _profileForm.ShowSuccessMessage("Account Update successful!");
-                    UpdateSession(user);
+                    _activityModel.UpdateUsernameOfActivity(SessionManager.Username, user.username);
+                    _goalModel.UpdateUsernameOfGoal(SessionManager.Username, user.username);
+                    if (_userModel.UpdateUser(user)) 
+                    {
+                        _profileForm.ShowSuccessMessage("Account Update successful!");
+                        UpdateSession(user);
+                    }
                 }
                 else
                 {
@@ -200,7 +205,7 @@ namespace Fitness_Tracker.Controller
         public bool AccountDelete(string username)
         {
             _goalModel.DeleteGoalByUsername(username);
-            _activityModel.DeleteActivityByUsername(username);
+
             if (_userModel.DeleteUser(username))
             {
                 return true;

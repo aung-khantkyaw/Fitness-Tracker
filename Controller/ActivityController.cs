@@ -91,7 +91,7 @@ namespace Fitness_Tracker.Controller
                 {
                     if (_goalModel.UpdateGoalIsAchieve(SessionManager.Goal))
                     {
-                        SessionManager.Goal = 0;
+                        SessionManager.Goal = _goalModel.GetActiveGoalId(SessionManager.Username);
                     }
                     if (_activityModel.AddActivity(activity))
                     {

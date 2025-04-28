@@ -12,6 +12,7 @@ namespace Fitness_Tracker.Controller
         private Profile _profileForm;
         private UserModel _userModel;
         private GoalModel _goalModel;
+        private ActivityModel _activityModel;
 
         public UserController(Main loginForm)
         {
@@ -35,6 +36,7 @@ namespace Fitness_Tracker.Controller
             _loginForm = loginForm;
             _userModel = new UserModel();
             _goalModel = new GoalModel();
+            _activityModel = new ActivityModel();
         }
 
         public User GetUserByUsername(string username)
@@ -197,12 +199,11 @@ namespace Fitness_Tracker.Controller
 
         public bool AccountDelete(string username)
         {
-            if (_goalModel.DeleteGoalByUsername(username))
+            _goalModel.DeleteGoalByUsername(username);
+            _activityModel.DeleteActivityByUsername(username);
+            if (_userModel.DeleteUser(username))
             {
-                if (_userModel.DeleteUser(username))
-                {
-                    return true;
-                }
+                return true;
             }
             return false; 
         }

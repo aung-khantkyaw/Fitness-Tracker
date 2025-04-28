@@ -62,6 +62,8 @@ namespace Fitness_Tracker
                 _goalController.DisplayGoalsByUsername(dataGridViewGoal, SessionManager.Username);
                 tbId.Text = string.Empty;
                 tbCalBurn.Text = string.Empty;
+                dtpStart.Value = DateTime.Now;
+                dtpEnd.Value = DateTime.Now;
             }
 
         }
@@ -124,6 +126,16 @@ namespace Fitness_Tracker
             {
                 tbId.Text = selectedRow.Cells[0].Value.ToString();
                 tbCalBurn.Text = selectedRow.Cells[2].Value.ToString();
+
+                if (DateTime.TryParse(selectedRow.Cells[3].Value.ToString(), out DateTime parsedStartDate))
+                {
+                    dtpStart.Value = parsedStartDate;
+                }
+
+                if (DateTime.TryParse(selectedRow.Cells[4].Value.ToString(), out DateTime parsedEndDate))
+                {
+                    dtpEnd.Value = parsedEndDate;
+                }
             }
         }
 

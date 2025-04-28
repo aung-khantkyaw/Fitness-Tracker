@@ -26,7 +26,7 @@ namespace Fitness_Tracker.Models
 
         [Required]
         [StringLength(50)]
-        public string IsAchieve { get; set; } = "Inprogress";
+        public string IsAchieve { get; set; };
 
         public int CaloriesBurned { get; set; }
     }

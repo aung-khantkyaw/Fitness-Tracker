@@ -18,6 +18,11 @@ namespace Fitness_Tracker.Controller
             _goalModel = new GoalModel();
         }
 
+        public Goals ActiveGoalDetail()
+        {
+            return _goalModel.GetGoalsById(SessionManager.Goal);
+        }
+
         public void DisplayGoals(DataGridView dataGridView)
         {
             try

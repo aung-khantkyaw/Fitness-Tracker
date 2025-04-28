@@ -58,9 +58,22 @@
             btnDelete = new Button();
             btnEdit = new Button();
             panel3 = new Panel();
+            panelGoal = new Panel();
+            label17 = new Label();
+            label15 = new Label();
+            label16 = new Label();
+            label14 = new Label();
+            labelGole = new Label();
+            label13 = new Label();
+            labelBurn = new Label();
+            labelEnd = new Label();
+            labelStart = new Label();
+            labelId = new Label();
+            label12 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panelGoal.SuspendLayout();
             SuspendLayout();
             // 
             // btnProfile
@@ -135,6 +148,7 @@
             // panel2
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(panelGoal);
             panel2.Controls.Add(rBtnFemale);
             panel2.Controls.Add(rBtnMale);
             panel2.Controls.Add(label11);
@@ -390,6 +404,134 @@
             panel3.Size = new Size(227, 123);
             panel3.TabIndex = 7;
             // 
+            // panelGoal
+            // 
+            panelGoal.Controls.Add(label17);
+            panelGoal.Controls.Add(label15);
+            panelGoal.Controls.Add(label16);
+            panelGoal.Controls.Add(label14);
+            panelGoal.Controls.Add(labelGole);
+            panelGoal.Controls.Add(label13);
+            panelGoal.Controls.Add(labelBurn);
+            panelGoal.Controls.Add(labelEnd);
+            panelGoal.Controls.Add(labelStart);
+            panelGoal.Controls.Add(labelId);
+            panelGoal.Controls.Add(label12);
+            panelGoal.Location = new Point(396, 3);
+            panelGoal.Name = "panelGoal";
+            panelGoal.Size = new Size(286, 331);
+            panelGoal.TabIndex = 18;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI", 9.75F);
+            label17.Location = new Point(203, 208);
+            label17.Name = "label17";
+            label17.Size = new Size(50, 17);
+            label17.TabIndex = 38;
+            label17.Text = "label17";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 9.75F);
+            label15.Location = new Point(203, 169);
+            label15.Name = "label15";
+            label15.Size = new Size(50, 17);
+            label15.TabIndex = 37;
+            label15.Text = "label15";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI", 9.75F);
+            label16.Location = new Point(203, 130);
+            label16.Name = "label16";
+            label16.Size = new Size(50, 17);
+            label16.TabIndex = 36;
+            label16.Text = "label16";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9.75F);
+            label14.Location = new Point(203, 90);
+            label14.Name = "label14";
+            label14.Size = new Size(50, 17);
+            label14.TabIndex = 35;
+            label14.Text = "label14";
+            // 
+            // labelGole
+            // 
+            labelGole.AutoSize = true;
+            labelGole.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelGole.Location = new Point(24, 90);
+            labelGole.Name = "labelGole";
+            labelGole.Size = new Size(109, 17);
+            labelGole.TabIndex = 34;
+            labelGole.Text = "Calories To Burn";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 9.75F);
+            label13.Location = new Point(203, 54);
+            label13.Name = "label13";
+            label13.Size = new Size(50, 17);
+            label13.TabIndex = 33;
+            label13.Text = "label13";
+            // 
+            // labelBurn
+            // 
+            labelBurn.AutoSize = true;
+            labelBurn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelBurn.Location = new Point(24, 208);
+            labelBurn.Name = "labelBurn";
+            labelBurn.Size = new Size(140, 17);
+            labelBurn.TabIndex = 32;
+            labelBurn.Text = "Total Calories Burned";
+            // 
+            // labelEnd
+            // 
+            labelEnd.AutoSize = true;
+            labelEnd.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelEnd.Location = new Point(24, 169);
+            labelEnd.Name = "labelEnd";
+            labelEnd.Size = new Size(64, 17);
+            labelEnd.TabIndex = 31;
+            labelEnd.Text = "End Date";
+            // 
+            // labelStart
+            // 
+            labelStart.AutoSize = true;
+            labelStart.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelStart.Location = new Point(24, 130);
+            labelStart.Name = "labelStart";
+            labelStart.Size = new Size(70, 17);
+            labelStart.TabIndex = 30;
+            labelStart.Text = "Start Date";
+            // 
+            // labelId
+            // 
+            labelId.AutoSize = true;
+            labelId.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            labelId.Location = new Point(24, 54);
+            labelId.Name = "labelId";
+            labelId.Size = new Size(52, 17);
+            labelId.TabIndex = 29;
+            labelId.Text = "Goal Id";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label12.Location = new Point(24, 13);
+            label12.Name = "label12";
+            label12.Size = new Size(97, 21);
+            label12.TabIndex = 28;
+            label12.Text = "Active Goal";
+            // 
             // Profile
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -410,6 +552,8 @@
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panelGoal.ResumeLayout(false);
+            panelGoal.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -445,5 +589,17 @@
         private Label label11;
         private Label label10;
         private TextBox tbAge;
+        private Panel panelGoal;
+        private Label label17;
+        private Label label15;
+        private Label label16;
+        private Label label14;
+        private Label labelGole;
+        private Label label13;
+        private Label labelBurn;
+        private Label labelEnd;
+        private Label labelStart;
+        private Label labelId;
+        private Label label12;
     }
 }

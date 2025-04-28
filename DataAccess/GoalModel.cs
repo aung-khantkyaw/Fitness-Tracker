@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using Fitness_Tracker.Models;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Fitness_Tracker.DataAccess
 {
@@ -287,12 +288,55 @@ namespace Fitness_Tracker.DataAccess
             }
         }
 
+        public Goals GetGoalsById(int Id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT * FROM Goals WHERE Id = @Id";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@Id", Id);                
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        Goals goal = new Goals
+                        {
+                            Id = (int)reader["Id"],
+                            Goal = (int)reader["Goal"],
+                            StartDate = reader["StartDate"].ToString(),
+                            EndDate = reader["EndDate"].ToString(),
+                            CaloriesBurned = (int)reader["CaloriesBurned"]
+                        };
+                        reader.Close();
+                        return goal;
+                    }
+                    else
+                    {
+                        reader.Close();
+                        return null;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Database Error retrieving Goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An unexpected error occurred while retrieving Goals for user: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+        }
+
         public int GetActiveGoalId(string username)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                string sql = "SELECT Id FROM Goals WHERE @Today >= StartDate AND (@Today <= EndDate OR EndDate IS NULL) AND IsAchieved = 'Inprogress' AND Username = @Username;";
+                string sql = "SELECT TOP 1 Id FROM Goals WHERE @Today >= StartDate AND (@Today <= EndDate OR EndDate IS NULL) AND IsAchieved = 'Inprogress' AND Username = @Username;";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     SqlParameter todayParam = new SqlParameter("@Today", System.Data.SqlDbType.DateTime);

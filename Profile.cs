@@ -1,12 +1,14 @@
 ﻿using Fitness_Tracker.Controller;
 using Fitness_Tracker.Utils;
 using Fitness_Tracker.Models;
+using Fitness_Tracker.DataAccess;
 
 namespace Fitness_Tracker
 {
     public partial class Profile : Form
     {
         private UserController _userController;
+        private GoalController _goalController;
         private Main _loginForm;
         private GoalForm _goalForm;
         private ActivityForm _activityForm;
@@ -16,6 +18,28 @@ namespace Fitness_Tracker
             InitializeComponent();
             _loginForm = loginForm;
             _userController = new UserController(this, _loginForm);
+            _goalController = new GoalController(_goalForm);
+            ShowActiveGoalDetail();
+        }
+
+        public void ShowActiveGoalDetail()
+        {
+            if(SessionManager.Goal > 0)
+            {
+                Goals goal = _goalController.ActiveGoalDetail();
+                if (goal != null)
+                {
+                    label13.Text = SessionManager.Goal.ToString();
+                    label14.Text = goal.Goal.ToString();
+                    label15.Text = goal.StartDate.ToString();
+                    label16.Text = goal.EndDate.ToString();
+                    label17.Text = goal.CaloriesBurned.ToString();
+                }
+            }
+            else
+            {
+                panelGoal.Visible = false;
+            }
         }
 
         private void Profile_Load(object sender, EventArgs e)

@@ -106,12 +106,19 @@ namespace Fitness_Tracker
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            ActivityType activity = (ActivityType)cbType.SelectedItem;
-            int metric_one_value = int.TryParse(tbOne.Text, out int parsedOne) ? parsedOne : 0;
-            int metric_two_value = int.TryParse(tbTwo.Text, out int parsedTwo) ? parsedTwo : 0;
-            int metric_three_value = int.TryParse(tbThree.Text, out int parsedThree) ? parsedThree : 0;
+            if (IsNumber.IsNumberOrNot(tbOne.Text) && IsNumber.IsNumberOrNot(tbTwo.Text) && IsNumber.IsNumberOrNot(tbThree.Text))
+            {
+                ActivityType activity = (ActivityType)cbType.SelectedItem;
+                int metric_one_value = int.TryParse(tbOne.Text, out int parsedOne) ? parsedOne : 0;
+                int metric_two_value = int.TryParse(tbTwo.Text, out int parsedTwo) ? parsedTwo : 0;
+                int metric_three_value = int.TryParse(tbThree.Text, out int parsedThree) ? parsedThree : 0;
 
-            _activityController.AddActivity(activity.activity, metric_one_value, metric_two_value, metric_three_value);
+                _activityController.AddActivity(activity.activity, metric_one_value, metric_two_value, metric_three_value);
+            }
+            else
+            {
+                ShowErrorMessage("All metrics must be Fill and only number type accept.");
+            }
         }
 
         private void ActivityForm_Load(object sender, EventArgs e)

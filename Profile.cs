@@ -66,7 +66,7 @@ namespace Fitness_Tracker
 
         private void btnGoal_Click(object sender, EventArgs e)
         {
-            if (SessionManager.UserWeight > 0)
+            if (SessionManager.UserWeight > 0 && SessionManager.UserAge > 0 && SessionManager.UserHeight > 0)
             {
                 _goalForm = new GoalForm();
                 this.Hide();
@@ -74,13 +74,13 @@ namespace Fitness_Tracker
             }
             else
             {
-                ShowErrorMessage("If your Weight is not greater than 0, you can't go to goal.");
+                ShowErrorMessage("If your Age, Weight and Height are not greater than 0, you can't go to goal.");
             }
         }
 
         private void btnActivity_Click(object sender, EventArgs e)
         {
-            if (SessionManager.UserWeight > 0)
+            if (SessionManager.Goal > 0)
             {
                 _activityForm = new ActivityForm();
                 this.Hide();
@@ -88,7 +88,7 @@ namespace Fitness_Tracker
             }
             else
             {
-                ShowErrorMessage("If your Weight is not greater than 0, you can't go to goal.");
+                ShowErrorMessage("If your have not active goal, you can't go to Activity.");
             }
         }
 
@@ -134,18 +134,25 @@ namespace Fitness_Tracker
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            User user = new User
+            if (IsNumber.IsNumberOrNot(tbAge.Text) && IsNumber.IsNumberOrNot(tbWeight.Text) && IsNumber.IsNumberOrNot(tbHeight.Text))
             {
-                Id = SessionManager.UserId,
-                username = tbUsername.Text,
-                email = tbEmail.Text,
-                age = int.TryParse(tbAge.Text, out int parsedAge) ? parsedAge : 0,
-                gender = rBtnMale.Checked ? "Male" : (rBtnFemale.Checked ? "Female" : null),
-                weight = int.TryParse(tbWeight.Text, out int parsedWeight) ? parsedWeight : 0,
-                height = int.TryParse(tbHeight.Text, out int parsedHeight) ? parsedHeight : 0,
-            };
+                User user = new User
+                {
+                    Id = SessionManager.UserId,
+                    username = tbUsername.Text,
+                    email = tbEmail.Text,
+                    age = int.TryParse(tbAge.Text, out int parsedAge) ? parsedAge : 0,
+                    gender = rBtnMale.Checked ? "Male" : (rBtnFemale.Checked ? "Female" : null),
+                    weight = int.TryParse(tbWeight.Text, out int parsedWeight) ? parsedWeight : 0,
+                    height = int.TryParse(tbHeight.Text, out int parsedHeight) ? parsedHeight : 0,
+                };
 
-            _userController.AccountUpdate(user);
+                _userController.AccountUpdate(user);
+            }
+            else
+            {
+                ShowErrorMessage("Age, Weight and Height must be number.");
+            }
         }
 
         private void btnReset_Click(object sender, EventArgs e)

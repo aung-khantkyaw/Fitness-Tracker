@@ -35,9 +35,16 @@ namespace Fitness_Tracker
 
         private void btnActivity_Click(object sender, EventArgs e)
         {
-            _activityForm = new ActivityForm();
-            this.Hide();
-            _activityForm.Show();
+            if (SessionManager.Goal > 0)
+            {
+                _activityForm = new ActivityForm();
+                this.Hide();
+                _activityForm.Show();
+            }
+            else
+            {
+                ShowErrorMessage("If your have not active goal, you can't go to Activity.");
+            }
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

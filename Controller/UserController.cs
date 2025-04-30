@@ -80,6 +80,7 @@ namespace Fitness_Tracker.Controller
                 _registrationForm.ShowErrorMessage("Username already exists.");
                 return;
             }
+
             if (GetUserByEmail(user.email) != null)
             {
                 _registrationForm.ShowErrorMessage("Email already exists.");
@@ -204,10 +205,10 @@ namespace Fitness_Tracker.Controller
 
         public bool AccountDelete(string username)
         {
-            _goalModel.DeleteGoalByUsername(username);
-
             if (_userModel.DeleteUser(username))
             {
+                _goalModel.DeleteGoalByUsername(username);
+                _activityModel.DeleteActivityByUsername(username);
                 return true;
             }
             return false; 

@@ -41,12 +41,12 @@ namespace Fitness_Tracker.Controller
                 }
                 else
                 {
-                    _activityForm.ShowErrorMessage("No goals found to display.");
+                    _activityForm.ShowErrorMessage("No Activities found to display.");
                 }
             }
             catch (Exception ex)
             {
-                _activityForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
+                _activityForm.ShowErrorMessage("Error retrieving Activities: " + ex.Message);
             }
         }
 
@@ -61,12 +61,12 @@ namespace Fitness_Tracker.Controller
                 }
                 else
                 {
-                    _activityForm.ShowErrorMessage("No goals found to display.");
+                    _activityForm.ShowErrorMessage("No Activities found to display.");
                 }
             }
             catch (Exception ex)
             {
-                _activityForm.ShowErrorMessage("Error retrieving goals: " + ex.Message);
+                _activityForm.ShowErrorMessage("Error retrieving Activities: " + ex.Message);
             }
         }
 
